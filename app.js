@@ -8,7 +8,7 @@ let favorites = [];
 let currentCocktailId = null;
 let confirmationCallback = null;
 const ADMIN_PASSWORD = 'cocktailnight2026';
-const EVENT_DATE = new Date('2026-12-24T20:00:00').getTime();
+const EVENT_DATE = new Date('2026-08-17T20:00:00').getTime();
 
 // ===========================
 // Initialization
@@ -515,14 +515,14 @@ function exportAsJSON() {
 }
 
 function exportAsCSV() {
-    let csv = 'Cocktail,Guest Name,Message,Date\\n';
+    let csv = 'Cocktail,Guest Name,Message,Date\n';
 
     registrations.forEach(reg => {
         const cocktail = cocktails.find(c => c.id === reg.cocktailId);
         const date = new Date(reg.date).toLocaleDateString();
         const message = reg.message ? `"${reg.message.replace(/"/g, '""')}"` : '';
 
-        csv += `"${cocktail?.name || 'Unknown'}","${reg.name}",${message},"${date}"\\n`;
+        csv += `"${cocktail?.name || 'Unknown'}","${reg.name}",${message},"${date}"\n`;
     });
 
     downloadFile(csv, 'cocktail-night-registrations.csv', 'text/csv');
@@ -615,18 +615,21 @@ function updateCountdown() {
 // ===========================
 
 function playConfetti() {
-    const container = document.getElementById('confetti-container');
+    const container = document.body;
     const emojis = ['🍹', '🎉', '✨', '🎊', '⭐', '🌟'];
 
     for (let i = 0; i < 30; i++) {
         setTimeout(() => {
             const confetti = document.createElement('div');
-            confetti.className = 'confetti';
             confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            confetti.style.position = 'fixed';
             confetti.style.left = Math.random() * 100 + '%';
             confetti.style.top = '-10px';
-            confetti.style.animation = `confettiFall ${2 + Math.random() * 1}s ease-in forwards`;
-
+            confetti.style.fontSize = '2rem';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '999';
+            confetti.style.animation = `slideIn ${2 + Math.random() * 1}s ease-in forwards`;
+            
             container.appendChild(confetti);
 
             setTimeout(() => confetti.remove(), 3000);
@@ -640,10 +643,12 @@ function playConfetti() {
 
 window.addEventListener('scroll', () => {
     const btn = document.getElementById('backToTopBtn');
-    if (window.pageYOffset > 300) {
-        btn.classList.add('show');
-    } else {
-        btn.classList.remove('show');
+    if (btn) {
+        if (window.pageYOffset > 300) {
+            btn.classList.add('show');
+        } else {
+            btn.classList.remove('show');
+        }
     }
 });
 
