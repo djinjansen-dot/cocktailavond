@@ -10,6 +10,10 @@ let confirmationCallback = null;
 const ADMIN_PASSWORD = 'cocktailnight2026';
 const EVENT_DATE = new Date('2026-08-17T20:00:00').getTime();
 
+console.log('Current time:', new Date().getTime());
+console.log('Event date:', EVENT_DATE);
+console.log('Event date object:', new Date(EVENT_DATE));
+
 // ===========================
 // Initialization
 // ===========================
@@ -39,6 +43,7 @@ async function loadCocktails() {
         const response = await fetch('cocktails.json');
         if (!response.ok) throw new Error('Failed to load cocktails');
         cocktails = await response.json();
+        console.log('Cocktails loaded:', cocktails.length);
     } catch (error) {
         console.error('Error loading cocktails:', error);
         showToast('Failed to load cocktail menu', 'error');
@@ -48,6 +53,7 @@ async function loadCocktails() {
 function loadRegistrations() {
     const stored = localStorage.getItem('cocktailRegistrations');
     registrations = stored ? JSON.parse(stored) : [];
+    console.log('Registrations loaded:', registrations);
 }
 
 function loadFavorites() {
@@ -57,6 +63,7 @@ function loadFavorites() {
 
 function saveRegistrations() {
     localStorage.setItem('cocktailRegistrations', JSON.stringify(registrations));
+    console.log('Registrations saved:', registrations);
 }
 
 function saveFavorites() {
@@ -69,6 +76,11 @@ function saveFavorites() {
 
 function renderCocktails() {
     const grid = document.getElementById('cocktailsGrid');
+    if (!grid) {
+        console.error('Cocktails grid not found');
+        return;
+    }
+    
     grid.innerHTML = '';
 
     const filtered = getFilteredCocktails();
@@ -127,12 +139,14 @@ function renderCocktails() {
             <div class="cocktail-actions">
                 <button class="btn btn-claim btn-${isReserved ? 'secondary' : 'primary'}" 
                     ${isReserved ? 'disabled' : ''}
-                    onclick="claimCocktail(${cocktail.id}, event)">
+                    onclick="claimCocktail(${cocktail.id}, event)"
+                    type="button">
                     ${isReserved ? '✓ Reserved' : 'Claim'}
                 </button>
                 <button class="btn btn-favorite ${isFavorite ? 'active' : ''}" 
                     onclick="toggleFavorite(${cocktail.id}, event)"
-                    title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+                    title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}"
+                    type="button">
                     ★
                 </button>
             </div>
@@ -156,30 +170,39 @@ function getFilteredCocktails() {
     let filtered = [...cocktails];
 
     // Search filter
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    if (searchTerm) {
-        filtered = filtered.filter(c => 
-            c.name.toLowerCase().includes(searchTerm) ||
-            c.description.toLowerCase().includes(searchTerm) ||
-            c.ingredients.some(i => i.toLowerCase().includes(searchTerm))
-        );
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        const searchTerm = searchInput.value.toLowerCase();
+        if (searchTerm) {
+            filtered = filtered.filter(c => 
+                c.name.toLowerCase().includes(searchTerm) ||
+                c.description.toLowerCase().includes(searchTerm) ||
+                c.ingredients.some(i => i.toLowerCase().includes(searchTerm))
+            );
+        }
     }
 
     // Difficulty filter
-    const difficulty = document.getElementById('difficultyFilter').value;
-    if (difficulty) {
-        filtered = filtered.filter(c => c.difficulty === difficulty);
+    const difficultyFilter = document.getElementById('difficultyFilter');
+    if (difficultyFilter) {
+        const difficulty = difficultyFilter.value;
+        if (difficulty) {
+            filtered = filtered.filter(c => c.difficulty === difficulty);
+        }
     }
 
     // Time filter
-    const timeFilter = document.getElementById('timeFilter').value;
+    const timeFilter = document.getElementById('timeFilter');
     if (timeFilter) {
-        filtered = filtered.filter(c => {
-            if (timeFilter === 'quick') return c.prepTime <= 5;
-            if (timeFilter === 'medium') return c.prepTime > 5 && c.prepTime <= 10;
-            if (timeFilter === 'slow') return c.prepTime > 10;
-            return true;
-        });
+        const timeValue = timeFilter.value;
+        if (timeValue) {
+            filtered = filtered.filter(c => {
+                if (timeValue === 'quick') return c.prepTime <= 5;
+                if (timeValue === 'medium') return c.prepTime > 5 && c.prepTime <= 10;
+                if (timeValue === 'slow') return c.prepTime > 10;
+                return true;
+            });
+        }
     }
 
     return filtered;
@@ -244,11 +267,11 @@ function openDetailModal(cocktailId) {
 
         <div class="detail-actions">
             ${!registration ? `
-                <button class="btn btn-primary" onclick="claimCocktail(${cocktailId})">
+                <button class="btn btn-primary" onclick="claimCocktail(${cocktailId})" type="button">
                     Claim This Cocktail
                 </button>
             ` : ''}
-            <button class="btn btn-secondary" onclick="closeDetailModal()">
+            <button class="btn btn-secondary" onclick="closeDetailModal()" type="button">
                 Close
             </button>
         </div>
@@ -263,7 +286,8 @@ function closeDetailModal() {
 }
 
 function openRegistrationModal() {
-    document.getElementById('registrationForm').reset();
+    const form = document.getElementById('registrationForm');
+    if (form) form.reset();
     document.getElementById('registrationModal').classList.add('show');
 }
 
@@ -272,13 +296,15 @@ function closeRegistrationModal() {
 }
 
 function openAdminModal() {
-    document.getElementById('adminForm').reset();
+    const form = document.getElementById('adminForm');
+    if (form) form.reset();
     document.getElementById('adminModal').classList.add('show');
 }
 
 function closeAdminModal() {
     document.getElementById('adminModal').classList.remove('show');
-    document.getElementById('adminPassword').value = '';
+    const pwd = document.getElementById('adminPassword');
+    if (pwd) pwd.value = '';
 }
 
 // ===========================
@@ -288,6 +314,8 @@ function closeAdminModal() {
 function claimCocktail(cocktailId, event) {
     if (event) event.stopPropagation();
 
+    console.log('Claim cocktail:', cocktailId);
+    
     const cocktail = cocktails.find(c => c.id === cocktailId);
     const existing = registrations.find(r => r.cocktailId === cocktailId);
 
@@ -303,11 +331,24 @@ function claimCocktail(cocktailId, event) {
 
 function submitRegistration(event) {
     event.preventDefault();
+    
+    console.log('Submit registration for cocktail:', currentCocktailId);
 
-    if (!currentCocktailId) return;
+    if (!currentCocktailId) {
+        showToast('No cocktail selected', 'error');
+        return;
+    }
 
-    const name = document.getElementById('guestName').value.trim();
-    const message = document.getElementById('guestMessage').value.trim();
+    const nameInput = document.getElementById('guestName');
+    const messageInput = document.getElementById('guestMessage');
+    
+    if (!nameInput || !messageInput) {
+        showToast('Form elements not found', 'error');
+        return;
+    }
+
+    const name = nameInput.value.trim();
+    const message = messageInput.value.trim();
 
     if (!name) {
         showToast('Please enter your name', 'error');
@@ -326,6 +367,8 @@ function submitRegistration(event) {
         message,
         date: new Date().toISOString()
     });
+
+    console.log('Registration added:', registrations);
 
     saveRegistrations();
     renderCocktails();
@@ -363,6 +406,13 @@ function toggleFavorite(cocktailId, event) {
 
 function updateRegistrationsDisplay() {
     const container = document.getElementById('registrationsContainer');
+    
+    if (!container) {
+        console.error('Registrations container not found');
+        return;
+    }
+
+    console.log('Update registrations display, count:', registrations.length);
 
     if (registrations.length === 0) {
         container.innerHTML = `
@@ -591,23 +641,20 @@ function updateCountdown() {
     const now = new Date().getTime();
     const distance = EVENT_DATE - now;
 
-    if (distance < 0) {
-        document.getElementById('days').textContent = '0';
-        document.getElementById('hours').textContent = '0';
-        document.getElementById('minutes').textContent = '0';
-        document.getElementById('seconds').textContent = '0';
-        return;
-    }
-
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    if (daysEl) daysEl.textContent = days;
+    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
 }
 
 // ===========================
@@ -668,6 +715,12 @@ function setupEventListeners() {
     document.getElementById('searchInput')?.addEventListener('input', renderCocktails);
     document.getElementById('difficultyFilter')?.addEventListener('change', renderCocktails);
     document.getElementById('timeFilter')?.addEventListener('change', renderCocktails);
+
+    // Registration form
+    const regForm = document.getElementById('registrationForm');
+    if (regForm) {
+        regForm.addEventListener('submit', submitRegistration);
+    }
 
     // Modal close on background click
     document.getElementById('registrationModal')?.addEventListener('click', (e) => {
