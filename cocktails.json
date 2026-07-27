@@ -1,0 +1,145 @@
+[
+  {
+    "id": 1,
+    "name": "Moscow Mule",
+    "emoji": "🍸",
+    "description": "A refreshing vodka-based cocktail with ginger beer and lime, served in a copper mug.",
+    "difficulty": "Easy",
+    "prepTime": 3,
+    "alcohol": "Vodka",
+    "ingredients": ["50ml Vodka", "100ml Ginger Beer", "15ml Fresh Lime Juice", "Lime Wedge", "Ice"],
+    "instructions": "Fill a copper mug with ice. Pour vodka and lime juice. Top with ginger beer. Stir gently. Garnish with lime wedge."
+  },
+  {
+    "id": 2,
+    "name": "Mojito",
+    "emoji": "🌿",
+    "description": "A Cuban classic with rum, mint, lime, sugar, and soda water - perfectly refreshing.",
+    "difficulty": "Easy",
+    "prepTime": 5,
+    "alcohol": "Rum",
+    "ingredients": ["45ml White Rum", "12 Fresh Mint Leaves", "30ml Fresh Lime Juice", "25ml Simple Syrup", "90ml Soda Water", "Ice"],
+    "instructions": "Muddle mint and simple syrup gently. Add rum and lime juice. Fill with ice. Top with soda water. Stir and garnish with mint sprig."
+  },
+  {
+    "id": 3,
+    "name": "Strawberry Mojito",
+    "emoji": "🍓",
+    "description": "A fruity twist on the classic mojito with fresh strawberries and mint.",
+    "difficulty": "Easy",
+    "prepTime": 5,
+    "alcohol": "Rum",
+    "ingredients": ["45ml White Rum", "8 Fresh Strawberries", "10 Fresh Mint Leaves", "30ml Fresh Lime Juice", "20ml Simple Syrup", "90ml Soda Water", "Ice"],
+    "instructions": "Muddle strawberries and mint. Add rum, lime juice, and simple syrup. Fill with ice. Top with soda water. Stir and garnish with strawberry and mint."
+  },
+  {
+    "id": 4,
+    "name": "Daiquiri",
+    "emoji": "🥃",
+    "description": "A simple yet elegant cocktail with rum, lime, and sugar - timeless and sophisticated.",
+    "difficulty": "Easy",
+    "prepTime": 3,
+    "alcohol": "Rum",
+    "ingredients": ["60ml White Rum", "30ml Fresh Lime Juice", "20ml Simple Syrup", "Ice"],
+    "instructions": "Shake rum, lime juice, and simple syrup with ice. Strain into a chilled coupe glass. Serve immediately."
+  },
+  {
+    "id": 5,
+    "name": "Espresso Martini",
+    "emoji": "☕",
+    "description": "A sophisticated cocktail combining vodka, coffee liqueur, and fresh espresso.",
+    "difficulty": "Medium",
+    "prepTime": 5,
+    "alcohol": "Vodka",
+    "ingredients": ["50ml Vodka", "25ml Coffee Liqueur", "30ml Fresh Espresso", "15ml Simple Syrup", "Ice", "Coffee Beans"],
+    "instructions": "Shake vodka, coffee liqueur, espresso, and simple syrup vigorously with ice. Strain into a chilled martini glass. Garnish with coffee beans."
+  },
+  {
+    "id": 6,
+    "name": "Aperol Spritz",
+    "emoji": "🍊",
+    "description": "A light and bubbly Italian aperitif with Aperol, Prosecco, and soda water.",
+    "difficulty": "Easy",
+    "prepTime": 2,
+    "alcohol": "Aperol",
+    "ingredients": ["60ml Prosecco", "40ml Aperol", "30ml Soda Water", "Orange Slice", "Ice"],
+    "instructions": "Fill a glass with ice. Add Aperol. Top with Prosecco and soda water. Stir gently. Garnish with orange slice."
+  },
+  {
+    "id": 7,
+    "name": "Mimosa",
+    "emoji": "🥂",
+    "description": "A classic brunch cocktail made with Champagne and fresh orange juice.",
+    "difficulty": "Easy",
+    "prepTime": 2,
+    "alcohol": "Champagne",
+    "ingredients": ["90ml Champagne", "90ml Fresh Orange Juice", "Orange Slice"],
+    "instructions": "Pour orange juice into a chilled flute glass. Top with Champagne. Stir gently. Garnish with orange slice."
+  },
+  {
+    "id": 8,
+    "name": "Dark 'n Stormy",
+    "emoji": "⛈️",
+    "description": "A powerful Bermudian cocktail with dark rum and spicy ginger beer.",
+    "difficulty": "Easy",
+    "prepTime": 3,
+    "alcohol": "Dark Rum",
+    "ingredients": ["60ml Dark Rum", "120ml Spiced Ginger Beer", "15ml Fresh Lime Juice", "Lime Wedge", "Ice"],
+    "instructions": "Fill a glass with ice. Pour dark rum and lime juice. Top with ginger beer. Stir well. Garnish with lime wedge."
+  },
+  {
+    "id": 9,
+    "name": "Paloma",
+    "emoji": "🍉",
+    "description": "A refreshing tequila cocktail with grapefruit juice, lime, and salt rim.",
+    "difficulty": "Easy",
+    "prepTime": 4,
+    "alcohol": "Tequila",
+    "ingredients": ["50ml Tequila", "90ml Fresh Grapefruit Juice", "30ml Fresh Lime Juice", "15ml Simple Syrup", "Salt Rim", "Grapefruit Slice", "Ice"],
+    "instructions": "Rim a glass with salt. Fill with ice. Pour tequila, grapefruit juice, lime juice, and simple syrup. Stir well. Garnish with grapefruit slice."
+  },
+  {
+    "id": 10,
+    "name": "Cuba Libre",
+    "emoji": "🇨🇺",
+    "description": "Simply rum and cola with lime - a timeless classic.",
+    "difficulty": "Easy",
+    "prepTime": 2,
+    "alcohol": "Rum",
+    "ingredients": ["50ml Dark Rum", "150ml Cola", "15ml Fresh Lime Juice", "Lime Wedge", "Ice"],
+    "instructions": "Fill a glass with ice. Pour rum and lime juice. Top with cola. Stir gently. Garnish with lime wedge."
+  },
+  {
+    "id": 11,
+    "name": "Long Island Iced Tea",
+    "emoji": "🍵",
+    "description": "A powerful cocktail made with multiple spirits - handle with care!",
+    "difficulty": "Hard",
+    "prepTime": 7,
+    "alcohol": "Multiple",
+    "ingredients": ["15ml Vodka", "15ml Rum", "15ml Gin", "15ml Tequila", "15ml Brandy", "30ml Sour Mix", "30ml Cola", "Lemon Slice", "Ice"],
+    "instructions": "Shake vodka, rum, gin, tequila, brandy, and sour mix with ice. Pour into a tall glass filled with ice. Top with cola. Stir well. Garnish with lemon slice."
+  },
+  {
+    "id": 12,
+    "name": "Whiskey Sour",
+    "emoji": "🥃",
+    "description": "A balanced cocktail with whiskey, lemon juice, and a hint of sweetness.",
+    "difficulty": "Easy",
+    "prepTime": 4,
+    "alcohol": "Whiskey",
+    "ingredients": ["60ml Whiskey", "30ml Fresh Lemon Juice", "20ml Simple Syrup", "Optional: Egg White", "Lemon Wheel", "Cherry", "Ice"],
+    "instructions": "Shake whiskey, lemon juice, and simple syrup with ice. Optional: add egg white for silky texture. Strain into a chilled coupe glass. Garnish with lemon wheel and cherry."
+  },
+  {
+    "id": 13,
+    "name": "Cosmopolitan",
+    "emoji": "💎",
+    "description": "An elegant cocktail made with vodka, cranberry juice, and triple sec.",
+    "difficulty": "Medium",
+    "prepTime": 4,
+    "alcohol": "Vodka",
+    "ingredients": ["40ml Vodka", "20ml Triple Sec", "30ml Cranberry Juice", "15ml Fresh Lime Juice", "Lime Wheel", "Ice"],
+    "instructions": "Shake vodka, triple sec, cranberry juice, and lime juice with ice. Strain into a chilled martini glass. Garnish with lime wheel."
+  }
+]
